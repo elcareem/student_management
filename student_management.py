@@ -10,15 +10,18 @@ def add_student():
 	
 	if not student_db:
 		student_db.update({1: {'name': name, 'age': age, 'department': department}})
+		print("Your student id number is 1")
 	else:
-		student_db.update({len(student_db) + 1: {'name': name, 'age': age, 'department': department}})
-
+		id_number = len(student_db) + 1
+		student_db.update({id_number: {'name': name, 'age': age, 'department': department}})
+		print(f"Your student id number is {id_number}  ")
 def delete_student():
 	student_id = "Enter the id of the student you want to delete>>>"
 	removed_id = student_db.pop(student_id, 'Not found')
-	print(f'student with id of {removed_id} has been removed')
+	print(f'Student with id of {removed_id} has been removed')
 	
-
+def update_student():
+	student
 def start():
 	display_info = '''
 STUDENT MANAGEMENT SYSTEM
