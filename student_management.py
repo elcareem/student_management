@@ -1,5 +1,9 @@
 
 student_db = {
+
+	1: {'name': 'John', 'age': 13, 'department': 'comp'},
+	2: {'name': 'Jane', 'age': 43, 'department': 'data'},
+	3: {'name': 'Jane', 'age': 20, 'department': 'bch'}
 }
 
 
@@ -40,8 +44,6 @@ Student with id no {student_id} updated succesfully
 	else:
 		print(f"Student with id {student_id} not found") 
 
-
-
 def display_one_student():
 	student_id = int(input("Enter student id>>> "))
 	if student_id in student_db.keys():
@@ -53,6 +55,35 @@ def display_all_students():
 	for student in student_db.keys():
 		print(student_db[student])
 
+def search_student_by_name():
+	name = input("Enter name>>> ")
+	students_found = []
+	for i in range(len(student_db.values())):
+		if list(student_db.values())[i]['name'] == name:
+			students_found.append({list(student_db.keys())[i] : list(student_db.values())[i]})
+	if students_found:
+		for student in students_found:
+			print(student)
+	else:
+		print("Not found")
+
+		
+def count_students():
+	print("The total number of students: ", len(student_db))		
+
+def filter_by_age():
+	age = int(input("Enter minimum age>>>"))
+	students_found = []
+	for i in range(len(student_db.values())):
+		if list(student_db.values())[i]['age'] >= age:
+			#students_found.append(list(student_db.items())[i])
+				students_found.append({list(student_db.keys())[i]: list(student_db.values())[i]})
+
+	if students_found:
+		for student in students_found:
+			print(student)
+	else:
+		print("Not found")	
 
 def start():
 	print( '''
@@ -64,9 +95,13 @@ Available commands:
 3 to Update Student
 4 to Display One Student
 5 to Display All Students
+6 to Search Student by Name
+7 to Show the total number of students in the system
+8 to Filter by age
+9 to Terminate the program
 	''')
-
-	while True:
+	execute = True
+	while execute:
 		command = input("Enter command>>> ")
 		if command == '1':
 			add_student()	
@@ -78,6 +113,14 @@ Available commands:
 			display_one_student()
 		elif command == '5':
 			display_all_students()
+		elif command == '6':
+			search_student_by_name()
+		elif command == '7':
+			count_students()	
+		elif command == '8':
+			filter_by_age()
+		elif command == '9':
+			execute = False
 		else:
 			print("Invalid command") 
 
